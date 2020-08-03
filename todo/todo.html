@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #app-body{
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(225, 225, 220, 0.6);
+      overflow: scroll;
+    }
+    header{
+      position: absolute;
+      top: 0;
+      position: fixed;
+      height: 15vh;
+      width: 100%;
+      background-color: royalblue;
+      color: white;
+      margin-top: 0;
+      text-align: center;
+      z-index: 99999;
+    }
+    #app-title{
+      font-family:sans-serif;
+    }
+    #add-task{
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      z-index: 999;
+      position:fixed; 
+      text-align: center;
+    }
+    #task-input{
+      height: 5vh;
+      width: 40vh;
+      border-radius: 0.1rem;
+      display: block;
+    }
+    #task-input::placeholder{
+      font-style: italic;
+      text-align: center;
+    }
+    button{
+      border: none;
+      background-color: royalblue;
+      color: white;
+      height: auto;
+      margin-top: 0.5rem;
+      
+      padding: 0.25rem 1.5rem;
+    }
+    .task-list{
+      position: absolute;
+      
+      top: 20%;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+       
+    }
+    .task{
+      background-color: royalblue;
+      width: 40vw;
+      height: 10vh;
+      color: white;
+      display: flex;
+      align-items: center; 
+      margin-top: 1rem;
+      box-shadow: 0.07rem 0.07rem 0.4rem black;
+
+    }
+  .delete {
+    margin-left: auto;
+    transform: rotate(45deg);
+    font-weight: bolder;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    }
+    .defaultDisplay{
+      font-size: 1.5rem;
+      font-family: cursive;
+      opacity: 0.5;
+    } 
+
+    @media screen and (max-width: 600px){
+      .task{
+        width: 70vw;
+      }
+    }   
+  
+  
+  </style>
+  
+  <div id="app-body">
+    <!--header-->
+    <header>
+      <h3 id="app-title">Todo App</h3>
+
+    </header>
+    <section class="task-list">
+      <p class="defaultDisplay">Your task goes here</p>
+     <!-- <div class="task">
+        <input type="checkbox" name="" class="done">
+        <p class="task-content"> Eat</p>
+        <p class="delete">+</p>
+      </div>
+
+      <div class="task">
+        <input type="checkbox" name="" class="done">
+        <p class="task-content"> Eat</p>
+        <p class="delete">+</p>
+      </div> -->
+
+    </section>
+    <form id="add-task">
+      <input type="text" id="task-input" placeholder="new task">
+      <button type="submit" id="submit">add</button>
+    </form>
+    
+
+
+  </div>
+
+
+
+
+
+  <script>
+    // define all variables
+    const addTaskBtn = document.querySelector('#submit');
+    const taskList = document.querySelector('.task-list');
+    const taskInput = document.querySelector('#task-input');
+
+    /// add a task
+    addTaskBtn.addEventListener('click', (e)=>{
+      if(taskInput.value === ''){
+        alert('You have not added any task');
+      }
+      else{
+
+      //create new task div
+      const newTaskDiv = document.createElement('div');
+      newTaskDiv.className = 'task'; // add class name
+
+      //create newTaskContent
+      const newTaskContent = document.createElement('p');
+      newTaskContent.className = 'task-content'; // add class name
+      newTaskContent.appendChild(document.createTextNode(taskInput.value));
+
+      //create delete 
+      const deleteTask = document.createElement('p');
+      deleteTask.className = 'delete'; // add class name
+      deleteTask.appendChild(document.createTextNode('+'));
+
+      //create checkBox
+      const checkBox = document.createElement('input');
+      checkBox.className = 'done'; // add class name
+      checkBox.type = 'checkbox';
+
+
+       //append deleteIcon to new tastDiv
+       newTaskDiv.appendChild(checkBox);
+
+      //append newTaskContent to new tastDiv
+      newTaskDiv.appendChild(newTaskContent);
+
+      //append deleteIcon to new tastDiv
+      newTaskDiv.appendChild(deleteTask);
+
+     //append newtaskDiv to taskList
+     taskList.appendChild(newTaskDiv);
+
+     //set defaultDisplay to none
+     document.querySelector('.defaultDisplay').style.display = 'none';
+
+     //clear input
+     taskInput.value = "";
+    }
+
+
+
+
+      e.preventDefault();
+    });
+
+    //deleteTask
+    taskList.addEventListener('click', (e)=>{
+      if(e.target.classList.contains('delete')){
+        if(confirm('Are You sure you want to delete this?')){
+          e.target.parentElement.remove();  
+        }
+        
+      }
+    });
+  
+  
+  </script>
+</body>
+</html>

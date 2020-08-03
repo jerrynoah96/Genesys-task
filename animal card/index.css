@@ -1,0 +1,53 @@
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main{
+  height: auto;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+.animal-card{
+  height: 100vh;
+  width: 60vh;
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0.1rem 0.1rem 0.5rem black;
+  position: relative;
+  display:flex;
+  flex-direction: column; 
+  padding-bottom: 0.5rem;
+     
+
+}
+.animal-img{
+  position: absolute;
+  height: 35%;
+  width: 100%;
+  top: 0;
+}
+.article-section{
+  position: absolute;
+  width: 100%;
+  top: 35%;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  
+}
+span{
+  font-weight: bold;
+}
+.story{
+  padding-right: 0.5rem;
+}
+@media screen and (max-width: 500px){
+  .animal-card{
+    width: 70vw;
+  }
+}
+
